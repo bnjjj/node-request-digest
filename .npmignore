@@ -1,0 +1,4 @@
+.jshintrc
+.gitignore
+.git
+npm-debug.log
