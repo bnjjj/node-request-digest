@@ -32,13 +32,9 @@ The digest client will make one reques to the server, authentication response
 is calculated and then the request is made again. Hopefully you will then
 be authorized.
 
-##Contributions
+## Contributions
 
 Feel free to contribute and extend this package and if you have bugs or if you want more specs make an issue. Have fun !
-
-# License
-
-See LICENSE.
 
 -------------
 
