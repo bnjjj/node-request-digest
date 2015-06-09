@@ -17,6 +17,17 @@
   "bugs": {
     "url": "https://github.com/bnjjj/node-request-digest/issues"
   },
+  "keywords": [
+    "request",
+    "client",
+    "http",
+    "digest",
+    "authentication",
+    "http-request",
+    "http-digest",
+    "request-digest",
+    "http-client"
+  ],
   "homepage": "https://github.com/bnjjj/node-request-digest",
   "dependencies": {
     "lodash": "3.9.3",
