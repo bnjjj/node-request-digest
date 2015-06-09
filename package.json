@@ -1,0 +1,25 @@
+{
+  "name": "request-digest",
+  "version": "0.0.1",
+  "description": "Perform request with a digest authentication",
+  "main": "request-digest.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bnjjj/node-request-digest"
+  },
+  "author": {
+    "name": "Benjamin Coenen",
+    "email": "benjamin.coenen@hotmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/bnjjj/node-request-digest/issues"
+  },
+  "homepage": "https://github.com/bnjjj/node-request-digest",
+  "dependencies": {
+    "lodash": "3.9.3",
+    "request": "2.57.0"
+  }
+}
