@@ -38,10 +38,6 @@ be authorized.
 
 Feel free to contribute and extend this package and if you have bugs or if you want more specs make an issue. Have fun !
 
-# License
-
-See LICENSE.
-
 -------------
 
 Made by [Coenen Benjamin](https://twitter.com/BnJ25) with love
