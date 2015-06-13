@@ -1,11 +1,13 @@
+[![NPM](https://nodei.co/npm/request-digest.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/request-digest/)
 # Request digest client in Node.js
 
-Perform request with a digest authentication
+Perform a client request (http) with a digest authentication
 
 ## Disclaimer
 
 Only tested against one server and spec is not followed fully. It works for me
 and for what I am doing. Later I'll update with unit tests and more options available.
+Pay attention, it only works with MD5 algorithm currently.
 
 ## Usage
 ```javascript
@@ -32,7 +34,7 @@ The digest client will make one reques to the server, authentication response
 is calculated and then the request is made again. Hopefully you will then
 be authorized.
 
-##Contributions
+## Contributions
 
 Feel free to contribute and extend this package and if you have bugs or if you want more specs make an issue. Have fun !
 

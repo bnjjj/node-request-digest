@@ -36,7 +36,7 @@ var HTTPDigest = function () {
   // Parse authentication headers and set response.
   //
   HTTPDigest.prototype._handleResponse = function handleResponse(options, res, callback) {
-    var challenge = this._parseChallenge(res.caseless.dict['www-authenticate']);
+    var challenge = this._parseDigestResponse(res.caseless.dict['www-authenticate']);
     var ha1 = crypto.createHash('md5');
     ha1.update([this.username, challenge.realm, this.password].join(':'));
     var ha2 = crypto.createHash('md5');
@@ -71,9 +71,7 @@ var HTTPDigest = function () {
       response: response.digest('hex'),
     };
 
-    authParams = _.omit(authParams, function(elt) {
-      return elt == null;
-    });
+    authParams = this._omitNull(authParams);
 
     if (cnonceObj.cnonce) {
       authParams.nc = cnonceObj.nc;
@@ -90,22 +88,37 @@ var HTTPDigest = function () {
   };
 
   //
+  // ## Delete null or undefined value in an object
+  //
+  HTTPDigest.prototype._omitNull = function omitNull(data) {
+    return _.omit(data, function(elt) {
+      return elt == null;
+    });
+  };
+
+  //
   // ## Parse challenge digest
   //
-  HTTPDigest.prototype._parseChallenge = function parseChallenge(digest) {
+  HTTPDigest.prototype._parseDigestResponse = function parseDigestResponse(digestHeader) {
     var prefix = 'Digest ';
-    var challenge = digest.substr(digest.indexOf(prefix) + prefix.length);
+    var challenge = digestHeader.substr(digestHeader.indexOf(prefix) + prefix.length);
     var parts = challenge.split(',');
     var length = parts.length;
     var params = {};
+
     for (var i = 0; i < length; i++) {
-      var part = parts[i].match(/^\s*?([a-zA-Z0-0]+)=("(.*)"|MD5)\s*?$/);
-      if (part.length > 2) {
-        params[part[1]] = part[2].replace(/\"/g, '');
+      var paramSplitted = this._splitParams(parts[i]);
+
+      if (paramSplitted.length > 2) {
+        params[paramSplitted[1]] = paramSplitted[2].replace(/\"/g, '');
       }
     }
 
     return params;
+  };
+
+  HTTPDigest.prototype._splitParams = function splitParams(paramString) {
+    return paramString.match(/^\s*?([a-zA-Z0-0]+)=("(.*)"|MD5|MD5-sess|token)\s*?$/);
   };
 
   //
@@ -114,8 +127,10 @@ var HTTPDigest = function () {
   HTTPDigest.prototype._generateCNONCE = function generateCNONCE(qop) {
     var cnonce = false;
     var nc = false;
+
     if (typeof qop === 'string') {
       var cnonceHash = crypto.createHash('md5');
+      
       cnonceHash.update(Math.random().toString(36));
       cnonce = cnonceHash.digest('hex').substr(0, 8);
       nc = this.updateNC();
@@ -130,16 +145,19 @@ var HTTPDigest = function () {
   HTTPDigest.prototype._compileParams = function compileParams(params) {
     var parts = [];
     for (var i in params) {
-      parts.push(i + '=' + (putDoubleQuotes(i) ? '"' : '') + params[i] + (putDoubleQuotes(i) ? '"' : ''));
+      var param = i + '=' + (putDoubleQuotes(i) ? '"' : '') + params[i] + (putDoubleQuotes(i) ? '"' : '');
+      parts.push(param);
     }
+
     return 'Digest ' + parts.join(',');
   };
 
   //
-  // ## Exclude double quotes with some params
+  // ## Define if we have to put double quotes or not
   //
   function putDoubleQuotes(i) {
     var excludeList = ['qop', 'nc'];
+
     return (_.includes(excludeList, i) ? true : false);
   }
 
@@ -154,6 +172,7 @@ var HTTPDigest = function () {
     }
     var padding = new Array(8).join('0') + '';
     var nc = this.nc + '';
+
     return padding.substr(0, 8 - nc.length) + nc;
   };
 

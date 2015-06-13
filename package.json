@@ -1,6 +1,6 @@
 {
   "name": "request-digest",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Perform request with a digest authentication",
   "main": "request-digest.js",
   "scripts": {
@@ -17,6 +17,7 @@
   "bugs": {
     "url": "https://github.com/bnjjj/node-request-digest/issues"
   },
+  "license": "ISC",
   "keywords": [
     "request",
     "client",
