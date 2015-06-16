@@ -80,6 +80,7 @@ var HTTPDigest = function () {
 
     var headers = options.headers || {};
     headers.Authorization = this._compileParams(authParams);
+    console.log(headers.Authorization);
     options.headers = headers;
 
     return request(options, function (error, response, body) {
@@ -133,7 +134,7 @@ var HTTPDigest = function () {
       
       cnonceHash.update(Math.random().toString(36));
       cnonce = cnonceHash.digest('hex').substr(0, 8);
-      nc = this.updateNC();
+      nc = this._updateNC();
     }
 
     return { cnonce: cnonce, nc: nc };
@@ -145,7 +146,7 @@ var HTTPDigest = function () {
   HTTPDigest.prototype._compileParams = function compileParams(params) {
     var parts = [];
     for (var i in params) {
-      var param = i + '=' + (putDoubleQuotes(i) ? '"' : '') + params[i] + (putDoubleQuotes(i) ? '"' : '');
+      var param = i + '=' + (this._putDoubleQuotes(i) ? '"' : '') + params[i] + (this._putDoubleQuotes(i) ? '"' : '');
       parts.push(param);
     }
 
@@ -155,16 +156,16 @@ var HTTPDigest = function () {
   //
   // ## Define if we have to put double quotes or not
   //
-  function putDoubleQuotes(i) {
+  HTTPDigest.prototype._putDoubleQuotes = function putDoubleQuotes(i) {
     var excludeList = ['qop', 'nc'];
 
     return (_.includes(excludeList, i) ? true : false);
-  }
+  };
 
   //
   // ## Update and zero pad nc
   //
-  HTTPDigest.prototype.updateNC = function updateNC() {
+  HTTPDigest.prototype._updateNC = function updateNC() {
     var max = 99999999;
     this.nc++;
     if (this.nc > max) {
