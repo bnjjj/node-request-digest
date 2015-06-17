@@ -1,4 +1,6 @@
 .jshintrc
 .gitignore
 .git
+test.js
+./tests
 npm-debug.log
