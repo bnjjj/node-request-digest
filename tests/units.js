@@ -1,12 +1,12 @@
 'use strict';
 var expect = require('chai').expect;
-var requestDigest = require('../request-digest')(process.env.USER, process.env.PASS);
+var requestDigest = require('../request-digest')(process.env.USER, process.env.PASSWORD);
 
 describe('+ Unit tests : ', function () {
 	it('- Initialisation :', function (done) {
 		expect(requestDigest.nc).to.equal(0);
 		expect(requestDigest.username).to.equal(process.env.USER);
-		expect(requestDigest.password).to.equal(process.env.PASS);
+		expect(requestDigest.password).to.equal(process.env.PASSWORD);
 		done();
 	});
 

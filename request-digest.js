@@ -80,7 +80,6 @@ var HTTPDigest = function () {
 
     var headers = options.headers || {};
     headers.Authorization = this._compileParams(authParams);
-    console.log(headers.Authorization);
     options.headers = headers;
 
     return request(options, function (error, response, body) {
