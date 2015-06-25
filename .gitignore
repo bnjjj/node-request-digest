@@ -1,7 +1,4 @@
 node_modules
 .DS_Store
-<<<<<<< HEAD
 test.js
-=======
 npm-debug.log
->>>>>>> 3c324e95349e8cf0faa0c560d65a54fb1862a655
