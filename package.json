@@ -27,7 +27,12 @@
     "http-request",
     "http-digest",
     "request-digest",
-    "http-client"
+    "http-client",
+    "www-authenticate",
+    "request-digest",
+    "node-digest",
+    "digestauth",
+    "auth"
   ],
   "homepage": "https://github.com/bnjjj/node-request-digest",
   "dependencies": {
