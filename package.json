@@ -5,7 +5,7 @@
   "main": "request-digest.es5.js",
   "scripts": {
     "test": "mocha tests",
-    "patch": "nvm use 0.10 && npm version patch && npm publish && git push origin master"
+    "patch": "npm version patch && npm publish && git push origin master"
   },
   "repository": {
     "type": "git",
