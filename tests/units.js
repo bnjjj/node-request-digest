@@ -1,6 +1,6 @@
 'use strict';
 var expect = require('chai').expect;
-var requestDigest = require('../request-digest')(process.env.USER, process.env.PASSWORD);
+var requestDigest = require('../request-digest.es5')(process.env.USER, process.env.PASSWORD);
 
 describe('+ Unit tests : ', function () {
 	it('- Initialisation :', function (done) {

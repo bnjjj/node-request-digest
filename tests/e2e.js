@@ -1,5 +1,5 @@
 'use strict';
-var requestDigest = require('../request-digest')(process.env.USER, process.env.PASSWORD);
+var requestDigest = require('../request-digest.es5')(process.env.USER, process.env.PASSWORD);
 
 describe('+ End to end tests : ', function () {
   it('- Test with GET HTTP : ', function (done) {

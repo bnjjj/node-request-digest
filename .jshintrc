@@ -9,6 +9,8 @@
 
   "mocha": true,
 
+  "esnext": true,
+
   /*
    * ENFORCING OPTIONS
    * =================
