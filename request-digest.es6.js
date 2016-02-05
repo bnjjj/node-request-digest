@@ -18,6 +18,10 @@ class HTTPDigest {
     }
 
     _handleResponse(options, res, callback) {
+        if (res.statusCode === 200) {
+            return callback(null, res, res.body);
+        }
+
         let challenge = this._parseDigestResponse(res.caseless.dict['www-authenticate']);
         let ha1 = createHash('md5');
         ha1.update([this.username, challenge.realm, this.password].join(':'));
