@@ -133,7 +133,7 @@ var HTTPDigest = (function () {
     }, {
         key: '_splitParams',
         value: function _splitParams(paramString) {
-            return paramString.match(/^\s*?([a-zA-Z0-0]+)=("(.*)"|MD5|MD5-sess|token)\s*?$/);
+            return paramString.match(/^\s*?([a-zA-Z0-0]+)=("(.*)"|MD5|MD5-sess|token|TRUE|FALSE)\s*?$/);
         }
 
         //
