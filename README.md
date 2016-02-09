@@ -6,7 +6,7 @@ Perform a client request (http) with a digest authentication
 ## Disclaimer
 
 Only tested against one server and spec is not followed fully. It works for me
-and for what I am doing. Later I'll update with unit tests and more options available.
+and for what I am doing.
 Pay attention, it only works with MD5 algorithm currently.
 
 ## Usage
@@ -30,7 +30,7 @@ digestRequest.request({
 });
 ```
 
-The digest client will make one reques to the server, authentication response
+The digest client will make one request to the server, authentication response
 is calculated and then the request is made again. Hopefully you will then
 be authorized.
 
@@ -41,4 +41,3 @@ Feel free to contribute and extend this package and if you have bugs or if you w
 -------------
 
 Made by [Coenen Benjamin](https://twitter.com/BnJ25) with love
-

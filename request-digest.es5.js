@@ -41,6 +41,9 @@ var HTTPDigest = (function () {
     }, {
         key: '_handleResponse',
         value: function _handleResponse(options, res, callback) {
+            if (!res) {
+                return callback(new Error('Bad request, res is undefined'));
+            }
             if (res.statusCode === 200) {
                 return callback(null, res, res.body);
             }

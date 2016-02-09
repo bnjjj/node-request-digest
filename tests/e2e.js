@@ -9,10 +9,9 @@ describe('+ End to end tests : ', function () {
       port: 80,
       method: 'GET',
       headers: {
-        'mail': process.env.USER + process.env.MAIL,
-        'password': process.env.PASSWORD
+        'mail': process.env.MAIL,
+        'password': process.env.PASSWORDHEADER
       }
     }, done);
   });
 });
-
