@@ -29,18 +29,16 @@ describe('+ Unit tests : ', function () {
 		  response: 'e69dea8ec16ea1187a3123',
 		  nc: '00000001',
 		  cnonce: 'dbe34' };
-		var header = 'Digest username=genae,realm=testprod,nonce=DIEguqcYBQA=774c1d2e307243433d,' + 
-			'uri=/rest/test/v1/test?offset=0&size=100,qop="auth",response=e69dea8ec16ea1187a3123,' + 
-				'nc="00000001",cnonce=dbe34';
+		var header = 'Digest username="genae",realm="testprod",nonce="DIEguqcYBQA=774c1d2e307243433d",uri="/rest/test/v1/test?offset=0&size=100",qop=auth,response="e69dea8ec16ea1187a3123",nc=00000001,cnonce="dbe34"';
 
 		expect(requestDigest._compileParams(params)).to.equal(header);
   	done();
   });
 
   it('- PutDoubleQuotes : ', function (done) {
-  	expect(requestDigest._putDoubleQuotes('qop')).to.equal(true);
-  	expect(requestDigest._putDoubleQuotes('nc')).to.equal(true);
-  	expect(requestDigest._putDoubleQuotes('nonce')).to.equal(false);
+  	expect(requestDigest._putDoubleQuotes('qop')).to.equal(false);
+  	expect(requestDigest._putDoubleQuotes('nc')).to.equal(false);
+  	expect(requestDigest._putDoubleQuotes('nonce')).to.equal(true);
   	done();
   });
 });
