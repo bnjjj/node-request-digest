@@ -2,6 +2,7 @@
 import requestUrl from 'request';
 import {createHash} from 'crypto';
 import _ from 'lodash';
+import Bluebird from 'bluebird';
 
 class HTTPDigest {
     constructor(username, password) {
@@ -10,11 +11,21 @@ class HTTPDigest {
         this.password = password;
     }
 
+    requestAsync(options) {
+        return new Bluebird((resolve, reject) => {
+            this.request(options, (error, response, body) => {
+                if (error) {
+                    return reject(error);
+                }
+
+                return resolve({ response, body });
+            });
+        });
+    }
+
     request(options, callback) {
         options.url = options.host + options.path;
-        return requestUrl(options, (error, res) => {
-            this._handleResponse(options, res, callback);
-        });
+        return requestUrl(options, (error, res) => this._handleResponse(options, res, callback));
     }
 
     _handleResponse(options, res, callback) {
@@ -71,7 +82,16 @@ class HTTPDigest {
         headers.Authorization = this._compileParams(authParams);
         options.headers = headers;
 
-        return requestUrl(options, (error, response, body) => {
+        return requestUrl(options, (error, response, body) => { 
+            if (response.statusCode >= 400) {
+                let errorMessage = {
+                    statusCode: response.statusCode,
+                    response,
+                    body
+                };
+
+                return callback(errorMessage);
+            }
             callback(error, response, body);
         });
     }
@@ -152,7 +172,7 @@ class HTTPDigest {
     _putDoubleQuotes(i) {
         let excludeList = ['qop', 'nc'];
 
-        return (_.includes(excludeList, i) ? true : false);
+        return !_.includes(excludeList, i);
     }
 
     //

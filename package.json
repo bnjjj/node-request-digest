@@ -6,6 +6,7 @@
   "scripts": {
     "test": "mocha tests",
     "patch": "npm version patch && npm publish && git push origin master",
+    "major": "npm version major && npm publish && git push origin master",
     "compile": "babel --presets es2015 request-digest.es6.js --out-file request-digest.es5.js"
   },
   "repository": {
@@ -38,6 +39,7 @@
   ],
   "homepage": "https://github.com/bnjjj/node-request-digest",
   "dependencies": {
+    "bluebird": "^3.3.3",
     "lodash": "3.9.3",
     "request": "2.57.0"
   },

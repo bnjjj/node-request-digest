@@ -19,6 +19,10 @@ var _lodash = require('lodash');
 
 var _lodash2 = _interopRequireDefault(_lodash);
 
+var _bluebird = require('bluebird');
+
+var _bluebird2 = _interopRequireDefault(_bluebird);
+
 var HTTPDigest = (function () {
     function HTTPDigest(username, password) {
         _classCallCheck(this, HTTPDigest);
@@ -29,13 +33,28 @@ var HTTPDigest = (function () {
     }
 
     _createClass(HTTPDigest, [{
+        key: 'requestAsync',
+        value: function requestAsync(options) {
+            var _this = this;
+
+            return new _bluebird2['default'](function (resolve, reject) {
+                _this.request(options, function (error, response, body) {
+                    if (error) {
+                        return reject(error);
+                    }
+
+                    return resolve({ response: response, body: body });
+                });
+            });
+        }
+    }, {
         key: 'request',
         value: function request(options, callback) {
-            var _this = this;
+            var _this2 = this;
 
             options.url = options.host + options.path;
             return (0, _request2['default'])(options, function (error, res) {
-                _this._handleResponse(options, res, callback);
+                return _this2._handleResponse(options, res, callback);
             });
         }
     }, {
@@ -95,6 +114,15 @@ var HTTPDigest = (function () {
             options.headers = headers;
 
             return (0, _request2['default'])(options, function (error, response, body) {
+                if (response.statusCode >= 400) {
+                    var errorMessage = {
+                        statusCode: response.statusCode,
+                        response: response,
+                        body: body
+                    };
+
+                    return callback(errorMessage);
+                }
                 callback(error, response, body);
             });
         }
@@ -184,7 +212,7 @@ var HTTPDigest = (function () {
         value: function _putDoubleQuotes(i) {
             var excludeList = ['qop', 'nc'];
 
-            return _lodash2['default'].includes(excludeList, i) ? true : false;
+            return !_lodash2['default'].includes(excludeList, i);
         }
 
         //
