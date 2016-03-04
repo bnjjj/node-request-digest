@@ -30,10 +30,13 @@ class HTTPDigest {
 
     _handleResponse(options, res, callback) {
         if (!res) {
-          return callback(new Error('Bad request, res is undefined'));
+          return callback(new Error('Bad request, answer is empty'));
         }
         if (res.statusCode === 200) {
             return callback(null, res, res.body);
+        }
+        if (typeof res.caseless.dict['www-authenticate'] !== 'string' || res.caseless.dict['www-authenticate'] === '') {
+            return callback(new Error('Bad request, www-authenticate field is malformed'));
         }
 
         let challenge = this._parseDigestResponse(res.caseless.dict['www-authenticate']);
