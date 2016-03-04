@@ -1,6 +1,6 @@
 {
   "name": "request-digest",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Perform request with a digest authentication",
   "main": "request-digest.es5.js",
   "scripts": {
