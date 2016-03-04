@@ -1,7 +1,7 @@
 # Request digest client in Node.js [![Build Status](https://travis-ci.org/bnjjj/node-request-digest.svg?branch=master)](https://travis-ci.org/bnjjj/node-request-digest)
 [![NPM](https://nodei.co/npm/request-digest.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/request-digest/)
 
-Perform a client request (http) with a digest authentication
+Perform a client request (http) with a digest authentication, a simple node http digest client.
 
 ## Disclaimer
 

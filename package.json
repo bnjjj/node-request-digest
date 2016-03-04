@@ -1,7 +1,7 @@
 {
   "name": "request-digest",
   "version": "1.0.2",
-  "description": "Perform request with a digest authentication",
+  "description": "Perform request with a digest authentication, a simple node http digest client",
   "main": "request-digest.es5.js",
   "scripts": {
     "test": "mocha tests",
