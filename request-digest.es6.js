@@ -24,7 +24,9 @@ class HTTPDigest {
     }
 
     request(options, callback) {
-        options.url = options.host + options.path;
+        let port = options.port ? options.port : 80;
+
+        options.url = `${options.host}:${port}${options.path}`;
         return requestUrl(options, (error, res) => this._handleResponse(options, res, callback));
     }
 
@@ -85,7 +87,7 @@ class HTTPDigest {
         headers.Authorization = this._compileParams(authParams);
         options.headers = headers;
 
-        return requestUrl(options, (error, response, body) => { 
+        return requestUrl(options, (error, response, body) => {
             if (response.statusCode >= 400) {
                 let errorMessage = {
                     statusCode: response.statusCode,
