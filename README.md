@@ -31,6 +31,8 @@ digestRequest.request({
 ```
 
 ## Usage (promise, only >= 1.0.0)
+
+### GET example
 ```javascript
 var digestRequest = require('request-digest')('username', 'password');
 digestRequest.requestAsync({
@@ -55,6 +57,35 @@ digestRequest.requestAsync({
 The digest client will make one request to the server, authentication response
 is calculated and then the request is made again. Hopefully you will then
 be authorized.
+
+### POST example
+
+Following is a POST with JSON body example. 
+
+```javascript
+var digestRequest = require('request-digest')('username', 'password');
+digestRequest.requestAsync({
+  host: 'http://test.com',
+  path: '/api/v1/test',
+  port: 80,
+  method: 'POST',
+  json: true,
+  body: {
+     myData: 'test'
+  },
+  headers: {
+        'Content-Type': 'application/json'
+      }
+})
+.then(function (response) {
+  console.log(response.body);
+})
+.catch(function (error) {
+  console.log(error.statusCode);
+  console.log(error.body);
+});
+```
+
 
 ## Return object
 + Response object : 
