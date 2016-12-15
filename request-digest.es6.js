@@ -163,6 +163,10 @@ class HTTPDigest {
     _compileParams(params) {
         let parts = [];
         for (let i in params) {
+            if (typeof params[i] === 'function') {
+              continue;
+            }
+
             let param = i + '=' + (this._putDoubleQuotes(i) ? '"' : '') + params[i] + (this._putDoubleQuotes(i) ? '"' : '');
             parts.push(param);
         }
