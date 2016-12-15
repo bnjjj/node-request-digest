@@ -201,6 +201,10 @@ var HTTPDigest = (function () {
         value: function _compileParams(params) {
             var parts = [];
             for (var i in params) {
+                if (typeof params[i] === 'function') {
+                  continue;
+                }
+
                 var param = i + '=' + (this._putDoubleQuotes(i) ? '"' : '') + params[i] + (this._putDoubleQuotes(i) ? '"' : '');
                 parts.push(param);
             }

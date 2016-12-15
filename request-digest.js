@@ -130,7 +130,7 @@ var HTTPDigest = function () {
 
     if (typeof qop === 'string') {
       var cnonceHash = crypto.createHash('md5');
-      
+
       cnonceHash.update(Math.random().toString(36));
       cnonce = cnonceHash.digest('hex').substr(0, 8);
       nc = this._updateNC();
@@ -145,6 +145,10 @@ var HTTPDigest = function () {
   HTTPDigest.prototype._compileParams = function compileParams(params) {
     var parts = [];
     for (var i in params) {
+      if (typeof params[i] === 'function') {
+        continue;
+      }
+
       var param = i + '=' + (this._putDoubleQuotes(i) ? '"' : '') + params[i] + (this._putDoubleQuotes(i) ? '"' : '');
       parts.push(param);
     }
@@ -183,4 +187,3 @@ var HTTPDigest = function () {
 module.exports = function _createDigestClient(username, password) {
   return new HTTPDigest(username, password);
 };
-
