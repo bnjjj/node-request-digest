@@ -72,6 +72,7 @@ class HTTPDigest {
             nonce: challenge.nonce,
             uri: options.path,
             qop: challenge.qop,
+            algorithm: "MD5",
             opaque: challenge.opaque,
             response: response.digest('hex')
         };
