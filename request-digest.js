@@ -66,6 +66,7 @@ var HTTPDigest = function () {
       realm: challenge.realm,
       nonce: challenge.nonce,
       uri: options.path,
+      algorithm: "MD5",
       qop: challenge.qop,
       opaque: challenge.opaque,
       response: response.digest('hex'),
