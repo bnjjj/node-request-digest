@@ -103,6 +103,7 @@ var HTTPDigest = (function () {
                 nonce: challenge.nonce,
                 uri: options.path,
                 qop: challenge.qop,
+                algorithm: "MD5",
                 opaque: challenge.opaque,
                 response: response.digest('hex')
             };
@@ -202,7 +203,7 @@ var HTTPDigest = (function () {
             var parts = [];
             for (var i in params) {
                 if (typeof params[i] === 'function') {
-                  continue;
+                    continue;
                 }
 
                 var param = i + '=' + (this._putDoubleQuotes(i) ? '"' : '') + params[i] + (this._putDoubleQuotes(i) ? '"' : '');
