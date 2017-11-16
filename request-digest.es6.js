@@ -89,7 +89,7 @@ class HTTPDigest {
         options.headers = headers;
 
         return requestUrl(options, (error, response, body) => {
-            if (response.statusCode >= 400) {
+            if (!error && response.statusCode >= 400) {
                 let errorMessage = {
                     statusCode: response.statusCode,
                     response,

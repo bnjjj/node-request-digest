@@ -120,7 +120,7 @@ var HTTPDigest = (function () {
             options.headers = headers;
 
             return (0, _request2['default'])(options, function (error, response, body) {
-                if (response.statusCode >= 400) {
+                if (!error && response.statusCode >= 400) {
                     var errorMessage = {
                         statusCode: response.statusCode,
                         response: response,
