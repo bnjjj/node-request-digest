@@ -160,7 +160,7 @@ var HTTPDigest = (function () {
             for (var i = 0; i < length; i++) {
                 var paramSplitted = this._splitParams(parts[i]);
 
-                if (paramSplitted.length > 2) {
+                if (paramSplitted && paramSplitted.length > 2) {
                     params[paramSplitted[1]] = paramSplitted[2].replace(/\"/g, '');
                 }
             }
@@ -170,6 +170,9 @@ var HTTPDigest = (function () {
     }, {
         key: '_splitParams',
         value: function _splitParams(paramString) {
+            if (!paramString) {
+                return null;
+            }
             return paramString.match(/^\s*?([a-zA-Z0-0]+)=("?(.*)"?|MD5|MD5-sess|token|TRUE|FALSE)\s*?$/);
         }
 
