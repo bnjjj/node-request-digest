@@ -54,7 +54,7 @@ var HTTPDigest = (function () {
 
             var port = options.port ? options.port : 80;
 
-            options.url = options.host + ':' + port + options.path;
+            options.url = options.excludePort ? '' + options.host + options.path : options.host + ':' + port + options.path;
             return (0, _request2['default'])(options, function (error, res) {
                 return _this2._handleResponse(options, res, callback);
             });

@@ -40,6 +40,7 @@ digestRequest.requestAsync({
   path: '/api/v1/test.json',
   port: 80,
   method: 'GET',
+  excludePort: false,
   headers: {
     'Custom-Header': 'OneValue',
     'Other-Custom-Header': 'OtherValue'
@@ -58,9 +59,11 @@ The digest client will make one request to the server, authentication response
 is calculated and then the request is made again. Hopefully you will then
 be authorized.
 
+If you don't want to specify or to use a specific port. Default port value is 80 but if you set the option `excludePort` to true it won't add a port to your URL.
+
 ### POST example
 
-Following is a POST with JSON body example. 
+Following is a POST with JSON body example.
 
 ```javascript
 var digestRequest = require('request-digest')('username', 'password');
@@ -88,14 +91,14 @@ digestRequest.requestAsync({
 
 
 ## Return object
-+ Response object : 
++ Response object :
 ```javascript
 response = {
   response,
   body
 };
 ```
-+ Error object : 
++ Error object :
 ```javascript
 error = {
   response,

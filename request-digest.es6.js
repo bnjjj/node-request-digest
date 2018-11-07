@@ -26,7 +26,7 @@ class HTTPDigest {
     request(options, callback) {
         let port = options.port ? options.port : 80;
 
-        options.url = `${options.host}:${port}${options.path}`;
+        options.url = options.excludePort ? `${options.host}${options.path}` : `${options.host}:${port}${options.path}`;
         return requestUrl(options, (error, res) => this._handleResponse(options, res, callback));
     }
 
